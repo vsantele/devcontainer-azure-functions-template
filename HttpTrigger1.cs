@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Net;
+using Company.Function.Models;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;

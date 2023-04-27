@@ -1,3 +1,5 @@
+namespace Company.Function.Models;
+
 public class Person
 {
     public string Id { get; set; } = string.Empty;
