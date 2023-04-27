@@ -1,58 +1,44 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
 {
-  "name": "C# (.NET)",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "devcontainer",
-  "workspaceFolder": "/workspaces",
-  "features": {
-    "ghcr.io/devcontainers/features/azure-cli:1": {
-      "version": "latest"
-    },
-    "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {
-      "version": "latest"
-    },
-    "ghcr.io/devcontainers/features/dotnet:1": {
-      "installUsingApt": true,
-      "version": "6"
-    }
-  },
-  "remoteEnv": {
-    "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
-    "ASPNETCORE_Kestrel__Certificates__Default__Path": "${containerEnv:HOME}/.aspnet/https/aspnetapp.pfx"
-  },
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [
-    7070,
-    7071,
-    8081,
-    10000,
-    10001,
-    10002
-  ],
-  "portsAttributes": {
-    "8081": {
-      "protocol": "https",
-      "label": "CosmosDB Emulator"
-    }
-  },
-  // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "dotnet restore",
-  // Configure tool-specific properties.
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "Azurite.azurite"
-      ],
-      "settings": {
-        "azurite.location": ".azurite",
-        "azurite.blobHost": "0.0.0.0",
-        "azurite.tableHost": "0.0.0.0",
-        "azurite.queueHost": "0.0.0.0"
-      }
-    }
-  }
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
+	"name": "Azure Functions & C# - .NET 7 (Isolated)",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"forwardPorts": [
+		7071,
+		10000,
+		10001,
+		8081
+	],
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	// Use this environment variable if you need to bind mount your local source code into a new container.
+	"remoteEnv": {
+		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+	},
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-azuretools.vscode-azurefunctions",
+				"ms-dotnettools.csharp",
+				"Azurite.azurite"
+			]
+		}
+	},
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "dotnet restore",
+	// Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode",
+	"features": {
+		"ghcr.io/devcontainers/features/dotnet:1": {
+			"installUsingApt": true,
+			"version": "6"
+		},
+		"ghcr.io/devcontainers/features/azure-cli:1": {
+			"version": "latest"
+		},
+		"ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {
+			"version": "latest"
+		}
+	}
 }

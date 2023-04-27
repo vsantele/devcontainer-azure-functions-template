@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
 using System.Net;
-using Company.Function.Models;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
@@ -19,15 +15,15 @@ namespace Company.Function
         }
 
         [Function("HttpTrigger1")]
-        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req, [CosmosDBInput(databaseName: "%CosmosDBName%", containerName: "%CosmosDBContainer%", Connection = "CosmosDB")] IReadOnlyList<Person> persons)
+        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req, [BlobInput("test/test.txt")] String myBlob)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
-            _logger.LogInformation("Count: " + persons.Count);
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
+            // var content = new StreamReader(myBlob).ReadToEnd();
 
-            response.WriteString("Welcome to Azure Functions!");
+            response.WriteString(myBlob.Length.ToString());
 
             return response;
         }
