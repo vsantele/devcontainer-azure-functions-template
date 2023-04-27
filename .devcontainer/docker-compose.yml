@@ -20,7 +20,8 @@ services:
     restart: unless-stopped
     network_mode: service:devcontainer
     volumes:
-      - ${workspaceFolder}/.azurite:/data
+      - azurite-data:/data
 
 volumes:
   cosmos-data:
+  azurite-data:
