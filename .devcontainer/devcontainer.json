@@ -8,15 +8,15 @@
   "workspaceFolder": "/workspaces",
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {
-		"version": "latest"
-	},
+      "version": "latest"
+    },
     "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {
-		"version": "latest"
-	},
-	"ghcr.io/devcontainers/features/dotnet:1": {
-		"installUsingApt": true,
-		"version": "6"
-	}
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/dotnet:1": {
+      "installUsingApt": true,
+      "version": "6"
+    }
   },
   "remoteEnv": {
     "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
@@ -24,6 +24,8 @@
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
+    7070,
+    7071,
     8081,
     10000,
     10001,
