@@ -1,0 +1,26 @@
+services:
+  devcontainer:
+    image: mcr.microsoft.com/devcontainers/dotnet:0-7.0
+    volumes:
+      - ..:/workspaces:cached
+    command: sleep infinity
+
+  cosmosdb:
+    image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
+    restart: unless-stopped
+    volumes:
+      - cosmos-data:/tmp/cosmos
+    environment:
+      AZURE_COSMOS_EMULATOR_PARTITION_COUNT: 3
+      AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE: true
+    network_mode: service:devcontainer
+
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    restart: unless-stopped
+    network_mode: service:devcontainer
+    volumes:
+      - ${workspaceFolder}/.azurite:/data
+
+volumes:
+  cosmos-data:

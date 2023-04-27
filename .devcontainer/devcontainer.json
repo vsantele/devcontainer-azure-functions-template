@@ -1,0 +1,56 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
+{
+  "name": "C# (.NET)",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspaces",
+  "features": {
+    "ghcr.io/devcontainers/features/azure-cli:1": {
+		"version": "latest"
+	},
+    "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {
+		"version": "latest"
+	},
+	"ghcr.io/devcontainers/features/dotnet:1": {
+		"installUsingApt": true,
+		"version": "6"
+	}
+  },
+  "remoteEnv": {
+    "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
+    "ASPNETCORE_Kestrel__Certificates__Default__Path": "${containerEnv:HOME}/.aspnet/https/aspnetapp.pfx"
+  },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [
+    8081,
+    10000,
+    10001,
+    10002
+  ],
+  "portsAttributes": {
+    "8081": {
+      "protocol": "https",
+      "label": "CosmosDB Emulator"
+    }
+  },
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "dotnet restore",
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Azurite.azurite"
+      ],
+      "settings": {
+        "azurite.location": ".azurite",
+        "azurite.blobHost": "0.0.0.0",
+        "azurite.tableHost": "0.0.0.0",
+        "azurite.queueHost": "0.0.0.0"
+      }
+    }
+  }
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+}
