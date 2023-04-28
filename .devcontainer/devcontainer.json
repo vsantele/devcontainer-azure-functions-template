@@ -1,6 +1,9 @@
 {
 	"name": "Azure Functions & C# - .NET 7 (Isolated)",
-	"dockerComposeFile": "docker-compose.yml",
+	"dockerComposeFile": [
+		"../docker-compose.yml",
+		"docker-compose.yml"
+	],
 	"service": "app",
 	"forwardPorts": [
 		7071,
