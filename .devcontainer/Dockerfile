@@ -1,7 +1,8 @@
 # Find the Dockerfile at this URL
 # https://github.com/Azure/azure-functions-docker/blob/dev/host/4/bullseye/amd64/dotnet/dotnet-isolated/dotnet-isolated-core-tools.Dockerfile
 FROM mcr.microsoft.com/devcontainers/dotnet:0-7.0
-
+COPY certs/. /usr/local/share/ca-certificates/
+RUN update-ca-certificates
 # Uncomment following lines If you want to enable Development Container Script
 # For more details https://github.com/microsoft/vscode-dev-containers/tree/main/script-library
 

@@ -8,6 +8,12 @@
 		10001,
 		8081
 	],
+	"portsAttributes": {
+		"8081": {
+			"label": "CosmosDB",
+			"protocol": "https"
+		}
+	},
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	// Use this environment variable if you need to bind mount your local source code into a new container.
 	"remoteEnv": {
@@ -40,5 +46,6 @@
 		"ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {
 			"version": "latest"
 		}
-	}
+	},
+	"postCreateCommand": "sh .devcontainer/setup.sh"
 }
